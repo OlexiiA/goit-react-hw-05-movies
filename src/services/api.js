@@ -7,7 +7,8 @@ export const trendingMovies = () => {
     });
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?${queryParams}`)
     .then(res => res.json())
-    .then(res => res.data);
+    .then(res => res.data.results)
+    .catch(error => error);
 }
 
 
