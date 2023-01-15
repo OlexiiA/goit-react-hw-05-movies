@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import * as movieAPI from "../../services/api"
 
 // const imgUrl = 'https://image.tmdb.org/t/p/w400';
-//{/* <img src= {poster_path && `${imgUrl}${poster_path}`} alt={title}/> */}//
+//{/* <img src= {poster_path && `${imgUrl}${poster_path}`} alt={title}/> 
 
 export const Home = () => {
 
