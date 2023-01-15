@@ -7,7 +7,19 @@ export const trendingMovies = () => {
     });
     return fetch(`https://api.themoviedb.org/3/trending/movie/day?${queryParams}`)
     .then(res => res.json())
-    .then(res => res.data.results)
+    .then(res => res.results)
+    .catch(error => error);
+};
+
+
+//Movies details
+export const movieDetails = (movieId) => {
+    const queryParams = new URLSearchParams({
+        api_key: KEY,
+    });
+    return fetch(`https://api.themoviedb.org/3/movie/${movieId}?${queryParams}&language=en-US`)
+    .then(res => res.json())
+    .then(res => res.results)
     .catch(error => error);
 }
 

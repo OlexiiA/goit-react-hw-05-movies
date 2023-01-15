@@ -1,4 +1,4 @@
 
 export const Movies = () => {
-    return <div>Movie</div>
+    return <input placeholder="Enter your search query"/>
 }
