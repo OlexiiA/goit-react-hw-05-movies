@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom"
+import React from 'react';
+import {Nav, NavList, NavItem} from './Header.styled'
 
 
 const headerItems = [
@@ -9,11 +10,11 @@ const headerItems = [
 
 
 export const Header = () => {
-    return <nav>
-        <ul>
+    return <Nav>
+        <NavList>
             {headerItems.map(e => <li key={e.title}>
-<NavLink to={e.to}>{e.title}</NavLink>
+<NavItem to={e.to}>{e.title}</NavItem>
             </li>)}
-        </ul>
-    </nav>
+        </NavList>
+    </Nav>
 }

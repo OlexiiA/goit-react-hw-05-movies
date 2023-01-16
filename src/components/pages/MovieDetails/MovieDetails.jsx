@@ -1,11 +1,11 @@
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // import * as movieAPI from '../../services/api'
-import {movieInfo} from '../../services/api';
+import {movieInfo} from '../../../services/api';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w200';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieDetails, setMovieDetails] = useState();
     const navigate = useNavigate();
@@ -60,3 +60,5 @@ export const MovieDetails = () => {
 
     )
 }
+
+export default MovieDetails;

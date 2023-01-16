@@ -27,7 +27,9 @@ if (!actorDetails) {
         <ul>
             {actorDetails.map(({profile_path, name, character, cast_id}) => {
                 return (<li key={cast_id}>
-                    <img src={`${imgUrl}${profile_path}`} alt={name}/>
+                    <img src={ profile_path !== null
+                        ? `${imgUrl}${profile_path}`
+                        : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'} alt={name} width='150'/>
                     <h4>{name}</h4>
                     <p>Character: {character}</p>
                 </li>)

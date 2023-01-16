@@ -1,3 +1,14 @@
-export const SearchBar = () => {
-    return <input placeholder="Enter your search query"/>
+export const SearchBar = ({ onSubmit }) => {
+
+
+    return (
+        <form onSubmit={onSubmit}>
+            <input
+                placeholder="Enter your search query"
+                name="search"       
+            />
+            <button type="submit">Submit</button>
+        </form>
+
+    )
 }
