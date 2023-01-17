@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import * as movieAPI from "../../../services/api"
+import {Container, List, Item, Title} from './Home.styled'
 
-// const imgUrl = 'https://image.tmdb.org/t/p/w400';
-//{/* <img src= {poster_path && `${imgUrl}${poster_path}`} alt={title}/> 
+const imgUrl = 'https://image.tmdb.org/t/p/w200';
+
 
 const Home = () => {
 
@@ -14,15 +15,18 @@ const Home = () => {
     }, [])
 
     return (
-        <>
-            <ul>
-                {trendMovie.map(({ id, title }) => {
-                    return <li key={id}>
-                        <Link to={`movies/${id}`}>{title}</Link>
-                    </li>
+        <Container>
+            <List>
+                {trendMovie.map(({ id, title, poster_path }) => {
+                    return <Item key={id}>
+                        <Link to={`movies/${id}`}>
+                        <img src={`${imgUrl}${poster_path}`} alt={title} /> 
+                            <Title>{title}</Title>
+                            </Link>
+                    </Item>
                 })}
-            </ul>
-        </>
+            </List>
+        </Container>
     )
 }
 

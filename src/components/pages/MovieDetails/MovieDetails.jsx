@@ -1,29 +1,23 @@
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { LinkToHome, BoxLink, Info, Details, Img, Title, BoxScore, Score, Overview, Text } from './MovieDetails.styled';
 import { useEffect, useState } from 'react';
-// import * as movieAPI from '../../services/api'
-import {movieInfo} from '../../../services/api';
+import { movieInfo } from '../../../services/api';
 
 const imgUrl = 'https://image.tmdb.org/t/p/w200';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieDetails, setMovieDetails] = useState();
-    const navigate = useNavigate();
-
-
-    // useEffect(() => {
-    //     movieAPI.movieDetails(movieId).then(setMovieDetails);
-    // },[movieId])
-
-    // useEffect(() => {
-    //     fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=2913964819360854cc0ff757d62600b5&language=en-US`).then(res => res.json()).then(setMovieDetails);
-    // }, [movieId]);
+    // const navigate = useNavigate(); // we need to import useNavigate from 'react-router-dom',
+    //  then add onClick={() => navigate(-1) in btn
+    const location = useLocation();
+    const backHome = location.state?.from ?? '/';
 
     useEffect(() => {
         movieInfo(movieId)
-          .then(({ data }) => setMovieDetails(data))
-          .catch(error => error);
-      }, [movieId]);
+            .then(({ data }) => setMovieDetails(data))
+            .catch(error => error);
+    }, [movieId]);
 
     console.log(movieId)
 
@@ -33,27 +27,33 @@ const MovieDetails = () => {
 
     const { poster_path, title, vote_average, overview, genres } = movieDetails
     const vote = Math.round(vote_average) * 10;
-    
+
     return (
         <>
-            <button type='button' onClick={() => navigate(-1)}>Back</button>
-            <div>
-                <img src={`${imgUrl}${poster_path}`} alt={title} />
-                <h3>{title}</h3>
-                <p>User Score: {vote}%</p>
-                <p>Overview</p>
-                <p>{overview}</p>
-                <p>Genres</p>
-                <p>{genres.map(e => <span key={e.id}>{e.name}</span>)}</p>
-            </div>
-            <hr />
-            <div>
-                <Link to='cast'>Cast</Link>
-            </div>
-            
-            <div>
-                <Link to='Reviews'>Reviews</Link>
-            </div>
+            <BoxLink>
+                <LinkToHome to={backHome}>Go back</LinkToHome>
+            </BoxLink>
+            <Info>
+                <Img src={`${imgUrl}${poster_path}`} alt={title} />
+                <Details>
+                    <Title>{title}</Title>
+                    <BoxScore><Score>User Score:</Score> {vote}%</BoxScore>
+                    <Overview>Overview:</Overview>
+                    <Text>{overview}</Text>
+                    <BoxScore><Score>Genres:</Score> {genres.map(e => <span key={e.id}>{e.name}</span>)}</BoxScore>
+                </Details>
+
+            </Info>
+            <BoxScore>
+                <BoxLink>
+                    <LinkToHome to='cast'>Cast</LinkToHome>
+                </BoxLink>
+
+                <BoxLink>
+                    <LinkToHome to='Reviews'>Reviews</LinkToHome>
+                </BoxLink>
+            </BoxScore>
+
             <Outlet />
         </>
 

@@ -6,7 +6,7 @@ import { FilmList } from '../../FilmList/FilmList'
 
 const Movies = () => {
 
-  const [filmsBySearch, setFilmsBySearch] = useState([]);
+  const [searchFilm, setSearchFilm] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query');
 
@@ -16,7 +16,7 @@ const Movies = () => {
     }
     (async function getFilmsBySearch() {
       const res = await findeFilm(searchQuery);
-      setFilmsBySearch(res.data.results);
+      setSearchFilm(res.data.results);
     })();
   }, [searchQuery]);
 
@@ -30,11 +30,8 @@ const Movies = () => {
   return (
     <>
       <SearchBar onSubmit={handleSubmit} />
-      {filmsBySearch.length > 0 ? <FilmList films={filmsBySearch} query={searchQuery} /> : null}
-    </>
-
-  )
-
-}
+      {searchFilm.length > 0 ? <FilmList films={searchFilm} query={searchQuery} /> : null}
+    </>);
+};
 
 export default Movies;
